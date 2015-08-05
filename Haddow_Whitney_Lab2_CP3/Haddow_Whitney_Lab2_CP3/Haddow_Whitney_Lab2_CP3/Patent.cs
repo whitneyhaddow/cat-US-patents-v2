@@ -8,7 +8,7 @@ namespace Haddow_Whitney_Lab2_CP3
 {
     public class Patent
     {
-        public Patent() { } //default constructor
+        public Patent() { } 
 
         public Patent(int number, string appNumber, string description, DateTime filingDate, string inventor, string inventor2)
         {
