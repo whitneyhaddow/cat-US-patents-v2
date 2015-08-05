@@ -23,13 +23,13 @@ namespace Haddow_Whitney_Lab2_CP3
             if (!File.Exists("Patents.xml"))
                 doc.Save("Patents.xml");
 
-            SortedList<int, Patent> patents = new SortedList<int, Patent>();//create empty list
+            SortedList<int, Patent> patents = new SortedList<int, Patent>();
 
-            XmlReaderSettings readerSettings = new XmlReaderSettings(); //define reader settings
+            XmlReaderSettings readerSettings = new XmlReaderSettings(); 
             readerSettings.IgnoreWhitespace = true;
             readerSettings.IgnoreComments = true;
 
-            XmlReader readXml = null; //create XML reader
+            XmlReader readXml = null; 
 
             try
             {
@@ -37,7 +37,7 @@ namespace Haddow_Whitney_Lab2_CP3
 
                 if (readXml.ReadToDescendant("Patent")) //read to first Patent node
                 {
-                    do //create new patent object
+                    do 
                     {
                         Patent patent = new Patent();
                         patent.Number = Convert.ToInt32(readXml["Number"]);
@@ -52,7 +52,7 @@ namespace Haddow_Whitney_Lab2_CP3
 
                         patents.Add(key, patent); //add key-value pair to list
                     }
-                    while (readXml.ReadToNextSibling("Patent")); //still are more elements
+                    while (readXml.ReadToNextSibling("Patent")); 
                 }
             }
             catch (XmlException ex)
@@ -81,16 +81,16 @@ namespace Haddow_Whitney_Lab2_CP3
         //save any new patents to XML file
         public static void SavePatents(SortedList<int, Patent> patents)
         {
-            XmlWriterSettings writerSettings = new XmlWriterSettings(); //define writer settings
+            XmlWriterSettings writerSettings = new XmlWriterSettings(); 
             writerSettings.Indent = true;
             writerSettings.IndentChars = ("    ");
-            XmlWriter writeXml = null; //create Xml writer
+            XmlWriter writeXml = null; 
 
             try
             {
                 writeXml = XmlWriter.Create(path, writerSettings);
 
-                writeXml.WriteStartDocument(); //start the document
+                writeXml.WriteStartDocument(); 
                 writeXml.WriteStartElement("Patents");
 
                 IList<Patent> patentValues = patents.Values;
@@ -100,7 +100,7 @@ namespace Haddow_Whitney_Lab2_CP3
                     writeXml.WriteAttributeString("Number", patent.Number.ToString());
                     writeXml.WriteElementString("AppNumber", patent.AppNumber);
                     writeXml.WriteElementString("Description", patent.Description);
-                    string datestring = patent.FilingDate.ToString("yyyy-MM-dd"); //convert date to string
+                    string datestring = patent.FilingDate.ToString("yyyy-MM-dd"); 
                     writeXml.WriteElementString("FilingDate", datestring);
                     writeXml.WriteElementString("Inventor", patent.Inventor);
                     writeXml.WriteElementString("Inventor2", patent.Inventor2);
